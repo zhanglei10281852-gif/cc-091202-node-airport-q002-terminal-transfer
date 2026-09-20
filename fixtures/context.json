@@ -1,1 +1,107 @@
-{"scenario":"跨航站楼中转时间与旅客条件","timezone":"Asia/Shanghai","records":[{"journeyId":"cx-1001","arrival":{"flight":"CA1832","terminal":"T2","time":"2026-09-12T22:50:00+08:00"},"departure":{"flight":"CA1519","terminal":"T3","time":"2026-09-13T00:35:00+08:00"},"steps":["DEBOARD","TRANSFER_BUS","SECURITY","WALK"],"passengerFlags":["WHEELCHAIR"]},{"ruleVersion":"mct-2026-09","from":"T2","to":"T3","baseMinutes":70,"securityMinutes":20,"effectiveFrom":"2026-09-01T00:00:00+08:00"}]}
+{
+  "scenario": "跨航站楼中转时间与旅客条件",
+  "timezone": "Asia/Shanghai",
+  "contextVersion": "ctx-2026-09-pack-1",
+  "records": [
+    {
+      "type": "journey",
+      "journeyId": "cx-1001",
+      "arrival": {
+        "flight": "CA1832",
+        "terminal": "T2",
+        "time": "2026-09-12T22:50:00+08:00"
+      },
+      "departure": {
+        "flight": "CA1519",
+        "terminal": "T3",
+        "time": "2026-09-13T00:35:00+08:00"
+      },
+      "steps": ["DEBOARD", "TRANSFER_BUS", "SECURITY", "WALK"]
+    },
+    {
+      "type": "journey",
+      "journeyId": "cx-1002",
+      "arrival": {
+        "flight": "MU5102",
+        "terminal": "T1",
+        "time": "2026-09-12T23:40:00+08:00"
+      },
+      "departure": {
+        "flight": "MU5816",
+        "terminal": "T2",
+        "time": "2026-09-13T01:20:00+08:00"
+      },
+      "steps": ["DEBOARD", "WALK", "IMMIGRATION", "SECURITY", "WALK"]
+    },
+    {
+      "type": "transferTime",
+      "from": "T2",
+      "to": "T3",
+      "steps": {
+        "DEBOARD": 10,
+        "TRANSFER_BUS": 35,
+        "SECURITY": 25,
+        "WALK": 12
+      }
+    },
+    {
+      "type": "transferTime",
+      "from": "T1",
+      "to": "T2",
+      "steps": {
+        "DEBOARD": 10,
+        "WALK": 7,
+        "IMMIGRATION": 35,
+        "SECURITY": 20
+      }
+    },
+    {
+      "type": "mctRule",
+      "ruleVersion": "mct-2026-09",
+      "from": "T2",
+      "to": "T3",
+      "baseMinutes": 45,
+      "securityMinutes": 20,
+      "immigrationMinutes": 0,
+      "buffers": {
+        "WHEELCHAIR": 20,
+        "INFANT": 10,
+        "TRANSIT_VISA_CHECK": 15
+      },
+      "effectiveFrom": "2026-09-01T00:00:00+08:00",
+      "effectiveTo": "2026-09-30T23:59:59+08:00"
+    },
+    {
+      "type": "mctRule",
+      "ruleVersion": "mct-2026-09",
+      "from": "T1",
+      "to": "T2",
+      "baseMinutes": 40,
+      "securityMinutes": 15,
+      "immigrationMinutes": 20,
+      "buffers": {
+        "WHEELCHAIR": 20,
+        "INFANT": 10,
+        "TRANSIT_VISA_CHECK": 15
+      },
+      "effectiveFrom": "2026-09-01T00:00:00+08:00",
+      "effectiveTo": "2026-09-30T23:59:59+08:00"
+    },
+    {
+      "type": "mctRule",
+      "ruleVersion": "mct-2026-10",
+      "from": "T2",
+      "to": "T3",
+      "baseMinutes": 50,
+      "securityMinutes": 20,
+      "immigrationMinutes": 0,
+      "buffers": {
+        "WHEELCHAIR": 20,
+        "INFANT": 10,
+        "TRANSIT_VISA_CHECK": 15
+      },
+      "effectiveFrom": "2026-10-01T00:00:00+08:00",
+      "effectiveTo": "2026-10-31T23:59:59+08:00"
+    }
+  ]
+}

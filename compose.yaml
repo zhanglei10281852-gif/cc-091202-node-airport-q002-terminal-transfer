@@ -5,5 +5,10 @@ services:
       - "${APP_PORT:-3000}:3000"
     environment:
       PORT: 3000
+      DATA_PATH: /app/data/state.json
+    volumes:
+      - mct-data:/app/data
     restart: unless-stopped
 
+volumes:
+  mct-data:
