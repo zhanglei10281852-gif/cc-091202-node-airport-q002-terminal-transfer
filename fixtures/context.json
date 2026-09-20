@@ -1,1 +1,68 @@
-{"scenario":"跨航站楼中转时间与旅客条件","timezone":"Asia/Shanghai","records":[{"journeyId":"cx-1001","arrival":{"flight":"CA1832","terminal":"T2","time":"2026-09-12T22:50:00+08:00"},"departure":{"flight":"CA1519","terminal":"T3","time":"2026-09-13T00:35:00+08:00"},"steps":["DEBOARD","TRANSFER_BUS","SECURITY","WALK"],"passengerFlags":["WHEELCHAIR"]},{"ruleVersion":"mct-2026-09","from":"T2","to":"T3","baseMinutes":70,"securityMinutes":20,"effectiveFrom":"2026-09-01T00:00:00+08:00"}]}
+{
+  "scenario": "跨航站楼中转时间与旅客条件",
+  "timezone": "Asia/Shanghai",
+  "riskWindowMinutes": 20,
+  "rules": [
+    {
+      "ruleVersion": "mct-2026-09",
+      "effectiveFrom": "2026-09-01T00:00:00+08:00",
+      "pairs": [
+        { "from": "T2", "to": "T3", "baseMinutes": 70, "transferBusMinutes": 15, "securityMinutes": 20, "walkMinutes": 0 },
+        { "from": "T3", "to": "T2", "baseMinutes": 50, "transferBusMinutes": 15, "immigrationMinutes": 25, "walkMinutes": 0 },
+        { "from": "T2", "to": "T2", "baseMinutes": 40, "securityMinutes": 10, "walkMinutes": 0 },
+        { "from": "T3", "to": "T3", "baseMinutes": 40, "securityMinutes": 10, "walkMinutes": 0 },
+        { "from": "*", "to": "*", "baseMinutes": 75, "securityMinutes": 15, "walkMinutes": 0 }
+      ],
+      "buffers": {
+        "INFANT": 30,
+        "WHEELCHAIR": 25,
+        "TRANSIT_VISA_REQUIRED": 30
+      }
+    },
+    {
+      "ruleVersion": "mct-2026-10",
+      "effectiveFrom": "2026-10-01T00:00:00+08:00",
+      "pairs": [
+        { "from": "T2", "to": "T3", "baseMinutes": 75, "transferBusMinutes": 15, "securityMinutes": 25, "walkMinutes": 0 },
+        { "from": "T3", "to": "T2", "baseMinutes": 65, "transferBusMinutes": 15, "immigrationMinutes": 30, "walkMinutes": 0 },
+        { "from": "T2", "to": "T2", "baseMinutes": 45, "securityMinutes": 10, "walkMinutes": 0 },
+        { "from": "T3", "to": "T3", "baseMinutes": 45, "securityMinutes": 10, "walkMinutes": 0 },
+        { "from": "*", "to": "*", "baseMinutes": 80, "securityMinutes": 15, "walkMinutes": 0 }
+      ],
+      "buffers": {
+        "INFANT": 30,
+        "WHEELCHAIR": 30,
+        "TRANSIT_VISA_REQUIRED": 35
+      }
+    }
+  ],
+  "records": [
+    {
+      "journeyId": "cx-1001",
+      "arrival": { "flight": "CA1832", "terminal": "T2", "scheduledTime": "2026-09-12T22:50:00+08:00" },
+      "departure": { "flight": "CA1519", "terminal": "T3", "scheduledTime": "2026-09-13T00:50:00+08:00" },
+      "steps": ["DEBOARD", "TRANSFER_BUS", "SECURITY", "WALK"],
+      "passengerGroup": {
+        "groupId": "G1001",
+        "passengers": [
+          { "passengerId": "P1001", "flags": ["WHEELCHAIR"] },
+          { "passengerId": "P1002", "flags": [] }
+        ]
+      }
+    },
+    {
+      "journeyId": "cx-1002",
+      "arrival": { "flight": "MU5102", "terminal": "T3", "scheduledTime": "2026-09-12T23:30:00+08:00" },
+      "departure": { "flight": "MU518", "terminal": "T2", "scheduledTime": "2026-09-13T01:10:00+08:00" },
+      "steps": ["DEBOARD", "TRANSFER_BUS", "IMMIGRATION", "WALK"],
+      "passengerGroup": {
+        "groupId": "G1002",
+        "passengers": [
+          { "passengerId": "P2001", "flags": [] },
+          { "passengerId": "P2002", "flags": ["TRANSIT_VISA_REQUIRED"] },
+          { "passengerId": "P2003", "flags": ["INFANT"] }
+        ]
+      }
+    }
+  ]
+}

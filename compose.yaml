@@ -5,5 +5,11 @@ services:
       - "${APP_PORT:-3000}:3000"
     environment:
       PORT: 3000
+      AUDIT_PATH: /app/data/audit-log.jsonl
+      SUPERVISOR_TOKEN: ${SUPERVISOR_TOKEN:-dev-supervisor-token}
+    volumes:
+      - mct-data:/app/data
     restart: unless-stopped
 
+volumes:
+  mct-data:
